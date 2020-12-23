@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "56abc574c9c50fc6e4b7f5ef2a76cd50",
+    "content-hash": "a6c2cecb9af2fcf434bb403f93b7bff5",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4427,6 +4427,49 @@
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
             "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
             "time": "2020-07-13T06:12:54+00:00"
+        },
+        {
+            "name": "tochka-developers/document-validator",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tochka-developers/document-validator.git",
+                "reference": "8b9de3cfe5ec2ca82defdc66a2f0db576959f1c2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tochka-developers/document-validator/zipball/8b9de3cfe5ec2ca82defdc66a2f0db576959f1c2",
+                "reference": "8b9de3cfe5ec2ca82defdc66a2f0db576959f1c2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Tochka\\Validators\\DocumentValidatorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Tochka\\Validators\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitriy Barakovskikh",
+                    "email": "hatsune333@gmail.com"
+                }
+            ],
+            "description": "Laravel validation for documents codes",
+            "time": "2018-09-12T09:08:39+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

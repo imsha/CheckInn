@@ -24,3 +24,6 @@ Route::get('/', function () {
 
     return view('welcome');
 });
+
+Route::get('/inn', [\App\Http\Controllers\CheckInnRealtimeController::class, 'form']);
+Route::post('/inn', [\App\Http\Controllers\CheckInnRealtimeController::class, 'check']);
