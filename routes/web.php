@@ -14,5 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+
+    $client = new \App\Services\Nalog\TaxPayerClient();
+
+    $date = new DateTime();
+
+    return $client->request(406379298934, $date);
+
+
     return view('welcome');
 });
