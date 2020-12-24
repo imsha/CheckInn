@@ -19,6 +19,9 @@ use GuzzleHttp\RequestOptions;
 class ApiClient
 {
     const REQUEST_DATE_FORMAT = 'Y-m-m';
+    const ERROR_VALIDATION = 'validation.failed';
+    const ERROR_UNAVAILABLE = 'taxpayer.status.service.unavailable.error';
+    const ERROR_LIMITED = 'taxpayer.status.service.limited.error';
 
     /**
      * @var string
