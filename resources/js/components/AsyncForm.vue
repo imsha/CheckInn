@@ -14,17 +14,15 @@
                     </div>
                 </div>
 
-                <div v-if="result.state === 'success'">
-                    <div v-if="result.status && result.status !== null && result.status" class="alert alert-success">
+                <div v-if="state === 'success'">
+                    <div v-if="result.status !== null && result.status" class="alert alert-success">
                         {{result.message}}
                     </div>
 
-                    <div v-if="result.status && result.status !== null && !result.status" class="alert alert-danger">
+                    <div v-if="result.status !== null && !result.status" class="alert alert-danger">
                         {{result.message}}
                     </div>
                 </div>
-
-
 
                 <button @click.prevent.stop="check" type="submit" class="btn btn-primary">Проверить</button>
             </form>
