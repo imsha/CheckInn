@@ -12,7 +12,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./src:/var/www/html:delegated
+      - ./:/var/www/html:delegated
     depends_on:
       - php
       - mysql
@@ -77,7 +77,7 @@ services:
       dockerfile: php.dockerfile
     container_name: artisan
     volumes:
-      - ./src:/var/www/html:delegated
+      - ./:/var/www/html:delegated
     depends_on:
       - mysql
     working_dir: /var/www/html
