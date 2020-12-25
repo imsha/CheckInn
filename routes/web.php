@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\CheckInnRealtimeController::class, 'form']);
-Route::post('/inn', [\App\Http\Controllers\CheckInnRealtimeController::class, 'check']);
+Route::get('/', [\App\Http\Controllers\CheckInnRealtimeController::class, 'form'])->name('form.base');
+Route::post('/check', [\App\Http\Controllers\CheckInnRealtimeController::class, 'check'])->name('check');
+
+Route::get('/async', \App\Http\Controllers\CheckInnAsyncController::class)->name('form.async');
 
