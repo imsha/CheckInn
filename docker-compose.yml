@@ -42,7 +42,7 @@ services:
       dockerfile: php.dockerfile
     container_name: php
     volumes:
-      - ./src:/var/www/html:delegated
+      - ./:/var/www/html:delegated
     ports:
       - "9000:9000"
     networks:
@@ -54,7 +54,7 @@ services:
       dockerfile: composer.dockerfile
     container_name: composer
     volumes:
-      - ./src:/var/www/html
+      - ./:/var/www/html
     working_dir: /var/www/html
     depends_on:
       - php
@@ -67,7 +67,7 @@ services:
     image: node:13.7
     container_name: npm
     volumes:
-      - ./src:/var/www/html
+      - ./:/var/www/html
     working_dir: /var/www/html
     entrypoint: ['npm']
 
