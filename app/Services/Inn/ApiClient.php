@@ -23,6 +23,13 @@ class ApiClient
     const ERROR_UNAVAILABLE = 'taxpayer.status.service.unavailable.error';
     const ERROR_LIMITED = 'taxpayer.status.service.limited.error';
 
+    const TIMEOUT = 60;
+
+    /**
+     * Минимальное время между запросами
+     */
+    const TIME_BETWEEN_REQUESTS = 30;
+
     /**
      * @var string
      */
@@ -36,7 +43,7 @@ class ApiClient
     /**
      * @param int $timeout
      */
-    public function __construct(int $timeout = 60)
+    public function __construct(int $timeout = self::TIMEOUT)
     {
         $this->httpClient = new Client([
             'timeout'  => $timeout,

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\Inn\Check;
+use App\Services\Inn\CheckInnBegin;
 
 class CheckInnQueueBeginController extends Controller
 {
-    public function __invoke()
+    public function __invoke(Check $request, CheckInnBegin $service)
     {
-
+        return $service->make($request);
     }
 }

@@ -13,17 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-
-    $client = new \App\Services\Nalog\TaxPayerClient();
-
-    $date = new DateTime();
-
-    return $client->request(406379298934, $date);
-
-
-    return view('welcome');
-});
-
-Route::get('/inn', [\App\Http\Controllers\CheckInnRealtimeController::class, 'form']);
+Route::get('/', [\App\Http\Controllers\CheckInnRealtimeController::class, 'form']);
 Route::post('/inn', [\App\Http\Controllers\CheckInnRealtimeController::class, 'check']);
+

@@ -15,7 +15,7 @@ class CheckQueueHandler
      * @param CheckInn        $job
      * @param CheckInnRequest $checkInnRequest
      */
-    public function make(CheckInn $job, CheckInnRequest $checkInnRequest) : array
+    public function make(CheckInn $job, CheckInnRequest $checkInnRequest)
     {
         $apiClient = new ApiClient();
         try {
@@ -37,7 +37,7 @@ class CheckQueueHandler
                             ]);
                             break;
                         case ApiClient::ERROR_LIMITED:
-                            dispatch($job)->delay(30);
+                            $job->release(ApiClient::TIME_BETWEEN_REQUESTS);
                             break;
                     }
                     break;
