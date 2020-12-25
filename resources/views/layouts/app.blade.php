@@ -21,13 +21,10 @@
     </nav>
 
 
-    <div class="container">
+    <div class="container" id="app">
         @yield('content')
     </div>
 </div>
-
-
-
 
 <footer>
     <div class="container">
