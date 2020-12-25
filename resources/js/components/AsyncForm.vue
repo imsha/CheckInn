@@ -56,7 +56,7 @@
                 }).then(response => {
                     this.state = response.data.state;
                     this.result = response.data.result;
-                    if(this.state === 'process') {
+                    if(this.state === 'process' || this.state === 'started') {
                         this.timeoutId = setTimeout(this.check.bind(this), 1000)
                     }
                 }).catch(error => {
