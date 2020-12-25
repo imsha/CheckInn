@@ -37,6 +37,8 @@ services:
       - laravel
 
   php:
+    depends_on:
+      - mysql
     build:
       context: .
       dockerfile: php.dockerfile
