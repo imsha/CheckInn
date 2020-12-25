@@ -1,46 +1,87 @@
-version: "3"
+version: '3'
+
+networks:
+  laravel:
+
 services:
-  php71-first:
+  site:
     build:
-      context: ./images/php74
-      args:
-        - USER_ID
-        - GROUP_ID
-    volumes:
-      - ./www:/var/www
-    environment:
-      XDEBUG_CONFIG: "remote_host=192.168.220.1 remote_enable=1 remote_autostart=off  remote_port=9008"
-      PHP_IDE_CONFIG: "serverName=first"
-    networks:
-      - test-network
-  nginx-test:
-    image: nginx
-    volumes:
-      - ./hosts:/etc/nginx/conf.d
-      - ./:/var/www
-      - ./logs:/var/log/nginx
+      context: .
+      dockerfile: nginx.dockerfile
+    container_name: nginx
     ports:
       - "8080:80"
+    volumes:
+      - ./src:/var/www/html:delegated
     depends_on:
-      - php71-first
+      - php
+      - mysql
     networks:
-      test-network:
-        aliases: # алиасы нужны если нужно общаться внутри сети между хостами. Например, если вы используете api
-          - first.loc
-  mysql-test:
-    image: mysql:5.7
+      - laravel
+
+  mysql:
+    image: mysql:5.7.29
+    container_name: mysql
+    restart: unless-stopped
+    tty: true
     ports:
       - "3306:3306"
-    volumes:
-      - ./mysql/data:/var/lib/mysql
     environment:
+      MYSQL_DATABASE: homestead
+      MYSQL_USER: homestead
+      MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
     networks:
-      - test-network
-networks:
-  test-network:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 192.168.220.0/28
+      - laravel
+
+  php:
+    build:
+      context: .
+      dockerfile: php.dockerfile
+    container_name: php
+    volumes:
+      - ./src:/var/www/html:delegated
+    ports:
+      - "9000:9000"
+    networks:
+      - laravel
+
+  composer:
+    build:
+      context: .
+      dockerfile: composer.dockerfile
+    container_name: composer
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    depends_on:
+      - php
+    user: laravel
+    networks:
+      - laravel
+    entrypoint: ['composer', '--ignore-platform-reqs']
+
+  npm:
+    image: node:13.7
+    container_name: npm
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    entrypoint: ['npm']
+
+  artisan:
+    build:
+      context: .
+      dockerfile: php.dockerfile
+    container_name: artisan
+    volumes:
+      - ./src:/var/www/html:delegated
+    depends_on:
+      - mysql
+    working_dir: /var/www/html
+    user: laravel
+    entrypoint: ['php', '/var/www/html/artisan']
+    networks:
+      - laravel
